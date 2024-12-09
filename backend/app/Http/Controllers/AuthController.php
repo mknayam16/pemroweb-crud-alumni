@@ -7,6 +7,27 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    public function index(){
+        $user = User::all();
+        
+        return [
+            'results' =>$user
+        ];
+
+    }
+    public function show($id){
+
+        $user = User::find($id);
+        if(!$user) {
+            return response()->json([
+                'message' => 'User Not Found.'
+            ], 404);
+        }
+
+        return response()->json([
+            'user' => $user
+        ], 200);
+    }
     public function register(Request $request){
         $fields = $request->validate([
             'name' => 'required|max:255',
@@ -45,5 +66,8 @@ class AuthController extends Controller
 
     public function logout(Request $request){
         $request->user()->tokens()->delete();
+        return [
+            'message' => 'You are logged out'
+        ];
     }
 }
