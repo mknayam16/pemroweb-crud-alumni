@@ -132,7 +132,7 @@ const TableData = () => {
               </Link>
               <button
                 onClick={() => deletePost(post.id)}
-                className="btn btn-secondary"
+                className="btn text-white bg-red-500"
               >
                 Delete
               </button>
